@@ -54,7 +54,10 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Add a Article from FireBase now", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
 
-            addData3()
+//            addData3()
+            articlePost("title","Will","Life",convertLongToDateString(System.currentTimeMillis()),"content")
+
+
         }
 
         button_get_data.setOnClickListener{view->
@@ -118,6 +121,41 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+    private fun articlePost(
+        title: String,
+        author: String,
+        tag: String,
+        createdTime: String,
+        content: String
+    ) {
+
+        val db = FirebaseFirestore.getInstance()
+
+        val user: HashMap<String, Any> = hashMapOf(
+            "title" to title,
+            "author" to author,
+            "tag" to tag,
+            "created_time" to createdTime,
+            "content" to content
+        )
+
+        db.collection("articles")
+            .document(createdTime)
+            .set(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot added with content_POST:$documentReference")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document_POST", e)
+            }
+    }
+
+
+
+
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -170,27 +208,4 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
 //
-//}
-//
-//
-//fun addData2() {
-//
-//    val db = FirebaseFirestore.getInstance()
-//
-//    // Create a new user with a first, middle, and last name
-//    val user = HashMap<String, Any>()
-//    user.put("first", "Alan")
-//    user.put("middle", "Mathison")
-//    user.put("last", "Turing")
-//    user.put("born", 1912)
-//    // Add a new document with a generated ID
-//    db.collection("users")
-//        .add(user)
-//        .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->
-//            Log.d(
-//                TAG,
-//                "DocumentSnapshot added with ID: " + documentReference.id
-//            )
-//        })
-//        .addOnFailureListener(OnFailureListener { e -> Log.w(TAG, "Error adding document", e) })
 //}

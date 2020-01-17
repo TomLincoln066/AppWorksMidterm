@@ -12,6 +12,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
     val db = FirebaseFirestore.getInstance()
+
+
     val TAG = "willTest"
     /**
      * Lazily initialize our [HomeViewModel].
