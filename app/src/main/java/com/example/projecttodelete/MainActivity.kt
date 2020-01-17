@@ -34,6 +34,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -49,67 +50,21 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
 
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Add a Article from FireBase now", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-//            addData()
-//            addData2()
+
             addData3()
         }
 
-        button_get_data.setOnClickListener{
+        button_get_data.setOnClickListener{view->
+            Snackbar.make(view, "Get  Article from FireBase and publish it", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+
             getData()
         }
 
 
-    }
-
-
-    fun addData() {
-
-        val db = FirebaseFirestore.getInstance()
-
-        // Create a new user with a first and last name
-        val user = HashMap<String, Any>()
-        user.put("first", "Ada")
-        user.put("last", "Lovelace")
-        user.put("born", 1815)
-
-        // Add a new document with a generated ID
-        db.collection("users")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d(
-                    TAG,
-                    "DocumentSnapshot added with ID: " + documentReference.id
-                )
-            }
-            .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
-
-    }
-
-
-    fun addData2() {
-
-        val db = FirebaseFirestore.getInstance()
-
-        // Create a new user with a first, middle, and last name
-        val user = HashMap<String, Any>()
-        user.put("first", "Alan")
-        user.put("middle", "Mathison")
-        user.put("last", "Turing")
-        user.put("born", 1912)
-        // Add a new document with a generated ID
-        db.collection("users")
-            .add(user)
-            .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->
-                Log.d(
-                    TAG,
-                    "DocumentSnapshot added with ID: " + documentReference.id
-                )
-            })
-            .addOnFailureListener(OnFailureListener { e -> Log.w(TAG, "Error adding document", e) })
     }
 
 
@@ -178,4 +133,64 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
+
+    fun convertLongToDateString(systemTime: Long): String {
+        return SimpleDateFormat("MMM-dd-yyyy HH:mm:ss")
+            .format(systemTime).toString()
+    }
+
+
+
 }
+
+
+
+
+
+//fun addData() {
+//
+//    val db = FirebaseFirestore.getInstance()
+//
+//    // Create a new user with a first and last name
+//    val user = HashMap<String, Any>()
+//    user.put("first", "Ada")
+//    user.put("last", "Lovelace")
+//    user.put("born", 1815)
+//
+//    // Add a new document with a generated ID
+//    db.collection("users")
+//        .add(user)
+//        .addOnSuccessListener { documentReference ->
+//            Log.d(
+//                TAG,
+//                "DocumentSnapshot added with ID: " + documentReference.id
+//            )
+//        }
+//        .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
+//
+//}
+//
+//
+//fun addData2() {
+//
+//    val db = FirebaseFirestore.getInstance()
+//
+//    // Create a new user with a first, middle, and last name
+//    val user = HashMap<String, Any>()
+//    user.put("first", "Alan")
+//    user.put("middle", "Mathison")
+//    user.put("last", "Turing")
+//    user.put("born", 1912)
+//    // Add a new document with a generated ID
+//    db.collection("users")
+//        .add(user)
+//        .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->
+//            Log.d(
+//                TAG,
+//                "DocumentSnapshot added with ID: " + documentReference.id
+//            )
+//        })
+//        .addOnFailureListener(OnFailureListener { e -> Log.w(TAG, "Error adding document", e) })
+//}
