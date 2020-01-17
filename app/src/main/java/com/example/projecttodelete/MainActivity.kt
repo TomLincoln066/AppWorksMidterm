@@ -34,7 +34,8 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,12 +52,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-//            addData()
+            addData()
 //            getData()
-            addData2()
+//            addData2()
+//            addData3()
+
 
         }
     }
@@ -68,12 +72,12 @@ class MainActivity : AppCompatActivity() {
 
 
         // Create a new user with a first and last name
-        val user = HashMap<String,Any>()
+        val user = HashMap<String, Any>()
         user.put("first", "Ada")
         user.put("last", "Lovelace")
         user.put("born", 1815)
 
-       // Add a new document with a generated ID
+        // Add a new document with a generated ID
         db.collection("users")
             .add(user)
             .addOnSuccessListener { documentReference ->
@@ -87,18 +91,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun addData2(){
+    fun addData2() {
 
         val db = FirebaseFirestore.getInstance()
 
         // Create a new user with a first, middle, and last name
-        val user = HashMap<String,Any>()
+        val user = HashMap<String, Any>()
         user.put("first", "Alan")
         user.put("middle", "Mathison")
         user.put("last", "Turing")
         user.put("born", 1912)
-
-// Add a new document with a generated ID
+        // Add a new document with a generated ID
         db.collection("users")
             .add(user)
             .addOnSuccessListener(OnSuccessListener<DocumentReference> { documentReference ->
@@ -111,8 +114,35 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun addData3() {
 
-    fun getData(){
+        val articles = FirebaseFirestore.getInstance().collection("articles")
+
+        val document = articles.document()
+
+        val data = hashMapOf(
+                "author" to hashMapOf(
+                "email" to "wayne@school.appworks.tw",
+                "id" to "waynechen323",
+                "name" to "AKA小安老師"
+            ),
+            "title" to "IU「亂穿」竟美出新境界！笑稱自己品味奇怪　網笑：靠顏值\n" +
+                    "撐住女神氣場 \"",
+            "content" to " 南韓歌手IU（李知恩）無論在歌唱方面或是近期的戲劇作品 都有亮眼的成績，但俗話說人無完美、美玉微瑕，曾再跟工作人員的互動影片中坦言 自己品味很奇怪，近日在IG上分享了宛如「媽媽們青春時代的玉女歌手」超復古穿搭 造型，卻意外美出新境界。 " ,
+            "createTime" to Calendar.getInstance()
+                .timeInMillis,
+            "id" to document.id,
+            "tag" to "Beauty"
+        )
+
+//        document.set(data)
+    }
+
+
+
+
+
+    fun getData() {
 
         val db = FirebaseFirestore.getInstance()
 
