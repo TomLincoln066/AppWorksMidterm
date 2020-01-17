@@ -50,26 +50,25 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Add a Article from FireBase now", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            addData()
-//            getData()
+//            addData()
 //            addData2()
-//            addData3()
-
-
+            addData3()
         }
+
+        button_get_data.setOnClickListener{
+            getData()
+        }
+
+
     }
 
 
     fun addData() {
 
         val db = FirebaseFirestore.getInstance()
-
 
         // Create a new user with a first and last name
         val user = HashMap<String, Any>()
@@ -116,6 +115,8 @@ class MainActivity : AppCompatActivity() {
 
     fun addData3() {
 
+        val db = FirebaseFirestore.getInstance()
+
         val articles = FirebaseFirestore.getInstance().collection("articles")
 
         val document = articles.document()
@@ -135,7 +136,8 @@ class MainActivity : AppCompatActivity() {
             "tag" to "Beauty"
         )
 
-//        document.set(data)
+        document.set(data as Map<String,Any>)
+//        db.collection(articles.path).add(data as Map<String,Any>)
     }
 
 
@@ -146,12 +148,12 @@ class MainActivity : AppCompatActivity() {
 
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("user")
+        db.collection("articles")
             .get()
             .addOnCompleteListener(OnCompleteListener<QuerySnapshot> { task ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        Log.d(TAG, document.id + " => " + document.data)
+                        Log.d("getData", document.id + " => " + document.data)
                     }
                 } else {
                     Log.w(TAG, "Error getting documents.", task.exception)
