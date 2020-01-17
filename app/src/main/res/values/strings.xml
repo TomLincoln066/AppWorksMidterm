@@ -15,6 +15,14 @@
 
 
 
+    <string-array name="tag_list">
+        <item>Lovely</item>
+        <item>Talk</item>
+        <item>Lie</item>
+        <item>WorkLife</item>
+    </string-array>
+
+    <string name="spinner_tag">Please select TAG</string>
 
 
 

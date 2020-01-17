@@ -55,9 +55,15 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Add a Article from FireBase now", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
 
-//            addData3()
-            articlePost("title","Will","Life",convertLongToDateString(System.currentTimeMillis()),"content")
 
+            articlePost(
+                "Title",
+                "Will",
+                "Life",
+                convertLongToDateString(System.currentTimeMillis()),
+                "content"
+            )
+//            addData3()
 
         }
 
@@ -81,26 +87,23 @@ class MainActivity : AppCompatActivity() {
         val document = articles.document()
 
         val data = hashMapOf(
-                "author" to hashMapOf(
+            "author" to hashMapOf(
                 "email" to "wayne@school.appworks.tw",
                 "id" to "waynechen323",
                 "name" to "AKA小安老師"
             ),
             "title" to "IU「亂穿」竟美出新境界！笑稱自己品味奇怪　網笑：靠顏值\n" +
                     "撐住女神氣場 \"",
-            "content" to " 南韓歌手IU（李知恩）無論在歌唱方面或是近期的戲劇作品 都有亮眼的成績，但俗話說人無完美、美玉微瑕，曾再跟工作人員的互動影片中坦言 自己品味很奇怪，近日在IG上分享了宛如「媽媽們青春時代的玉女歌手」超復古穿搭 造型，卻意外美出新境界。 " ,
+            "content" to " 南韓歌手IU（李知恩）無論在歌唱方面或是近期的戲劇作品 都有亮眼的成績，但俗話說人無完美、美玉微瑕，曾再跟工作人員的互動影片中坦言 自己品味很奇怪，近日在IG上分享了宛如「媽媽們青春時代的玉女歌手」超復古穿搭 造型，卻意外美出新境界。 ",
             "createTime" to Calendar.getInstance()
                 .timeInMillis,
             "id" to document.id,
             "tag" to "Beauty"
         )
 
-        document.set(data as Map<String,Any>)
+        document.set(data as Map<String, Any>)
 //        db.collection(articles.path).add(data as Map<String,Any>)
     }
-
-
-
 
 
     fun getData() {
@@ -120,7 +123,6 @@ class MainActivity : AppCompatActivity() {
             })
 
     }
-
 
 
     private fun articlePost(
@@ -147,7 +149,7 @@ class MainActivity : AppCompatActivity() {
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with content_POST:$documentReference")
                 Log.d(TAG, "DocumentSnapshot added with content_POST:$title")
-                Toast.makeText(applicationContext,"sendSuccess",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "sendSuccess", Toast.LENGTH_SHORT).show()
 
 
             }
@@ -155,10 +157,6 @@ class MainActivity : AppCompatActivity() {
                 Log.w(TAG, "Error adding document_POST", e)
             }
     }
-
-
-
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -178,18 +176,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun convertLongToDateString(systemTime: Long): String {
         return SimpleDateFormat("MMM-dd-yyyy HH:mm:ss")
             .format(systemTime).toString()
     }
 
 
-
 }
-
-
-
 
 
 //fun addData() {
