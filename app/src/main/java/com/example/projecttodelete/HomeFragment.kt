@@ -32,19 +32,25 @@ class HomeFragment : Fragment() {
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        /*RecyclerViewAdapter*/
+
         val adapter = HomeFragmentAdapter()
         binding.articleRecycler.adapter =adapter
 
-        /*queryPostFromFireBase*/
+
         queryPost(adapter)
 
+
+
+        binding.layoutSwipeRefresh.setOnRefreshListener {
+            queryPost(adapter)
+            binding.layoutSwipeRefresh.isRefreshing = false
+        }
 
 
         return binding.root
     }
 
-    /*queryPostFromFireBase*/
+
     private fun queryPost(adapter: HomeFragmentAdapter){
         val articleList = mutableListOf<Article>()
 
