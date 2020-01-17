@@ -13,7 +13,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 class HomeFragment : Fragment() {
     val db = FirebaseFirestore.getInstance()
 
-
     val TAG = "willTest"
     /**
      * Lazily initialize our [HomeViewModel].
@@ -41,10 +40,6 @@ class HomeFragment : Fragment() {
 
 
 
-        binding.layoutSwipeRefresh.setOnRefreshListener {
-            queryPost(adapter)
-            binding.layoutSwipeRefresh.isRefreshing = false
-        }
 
 
         return binding.root

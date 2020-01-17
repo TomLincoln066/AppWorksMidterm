@@ -61,12 +61,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        button_get_data.setOnClickListener{view->
-            Snackbar.make(view, "Get  Article from FireBase and publish it", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-
-            getData()
-        }
+//        button_get_data.setOnClickListener{view->
+//            Snackbar.make(view, "Get  Article from FireBase and publish it", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//
+//            getData()
+//        }
 
 
     }
