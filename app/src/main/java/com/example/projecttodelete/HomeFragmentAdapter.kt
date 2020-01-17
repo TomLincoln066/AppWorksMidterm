@@ -1,63 +1,56 @@
 package com.example.projecttodelete
 
-//class HomeFragmentAdapter :
-//    ListAdapter<String, DetailColorAdapter.DetailViewHolder>(
-//        DiffCallback
-//    ) {
-//    /**
-//     * The MarsPropertyViewHolder constructor takes the binding variable from the associate
-//     * GridViewItem, which nicely gives it access to the full [MarsProperty] information.
-//     */
-//
-//    class DetailViewHolder(private var binding: DetailColorItemBinding) :
-//        RecyclerView.ViewHolder(binding.root) {
-//        fun bind(string: String) {
-//            binding.color = string
-//            // This is important, because it forces the data binding to execute immediately,
-//            // which allows the RecyclerView to make the correct view size measurements
-//            binding.executePendingBindings()
-//        }
-//    }
-//
-//    /**
-//     * Allows the RecyclerView to determine which items have changed when the [List] of [MarsProperty]
-//     * has been updated.
-//     */
-//    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
-//        override fun areItemsTheSame(
-//            oldItem: String,
-//            newItem: String
-//        ): Boolean {
-//            return oldItem === newItem
-//        }
-//
-//        override fun areContentsTheSame(
-//            oldItem: String,
-//            newItem: String
-//        ): Boolean {
-//            return oldItem == newItem
-//        }
-//    }
-//
-//    /**
-//     * Create new [RecyclerView] item views (invoked by the layout manager)
-//     */
-//    override fun onCreateViewHolder(
-//        parent: ViewGroup,
-//        viewType: Int
-//    ): DetailViewHolder {
-//        return DetailViewHolder(
-//            DetailColorItemBinding.inflate(LayoutInflater.from(parent.context))
-//        )
-//    }
-//
-//    /**
-//     * Replaces the contents of a view (invoked by the layout manager)
-//     */
-//    override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
-//        val string = getItem(position)
-//        holder.bind(string)
-//    }
-//}
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.projecttodelete.databinding.ItemHomeBinding
+
+class HomeFragmentAdapter :
+    ListAdapter<Article, HomeFragmentAdapter.ArticleViewHolder>(
+        DiffCallback
+    ) {
+
+    class ArticleViewHolder(private var binding: ItemHomeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: Article) {
+            binding.article = article
+            // This is important, because it forces the data binding to execute immediately,
+            // which allows the RecyclerView to make the correct view size measurements
+            binding.executePendingBindings()
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<Article>() {
+        override fun areItemsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ): Boolean {
+            return oldItem.createdTime == newItem.createdTime
+        }
+
+        override fun areContentsTheSame(
+            oldItem: Article,
+            newItem: Article
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ArticleViewHolder {
+        return ArticleViewHolder(
+            ItemHomeBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        )
+    }
+
+    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+        val article = getItem(position)
+        holder.bind(article)
+    }
+}
 
 

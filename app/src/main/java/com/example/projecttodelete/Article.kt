@@ -10,9 +10,14 @@ data class ArticleList(
 )
 
 data class Article(
-    @Json(name = "created_time") val createdTime :String,
-    val author :String,
-    val tag :String,
-    val title :String,
-    val content :String
+    val createdTime: String,
+    val author: String,
+    val tag: String,
+    val title: String,
+    val content: String
+//    @Json(name = "created_time") val createdTime :String,
+//    val author :String,
+//    val tag :String,
+//    val title :String,
+//    val content :String
 )

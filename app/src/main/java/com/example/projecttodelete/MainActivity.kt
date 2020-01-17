@@ -34,6 +34,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -145,6 +146,10 @@ class MainActivity : AppCompatActivity() {
             .set(user)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with content_POST:$documentReference")
+                Log.d(TAG, "DocumentSnapshot added with content_POST:$title")
+                Toast.makeText(applicationContext,"成功送出文章",Toast.LENGTH_SHORT).show()
+
+
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document_POST", e)
@@ -174,7 +179,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun convertLongToDateString(systemTime: Long): String {
+    private fun convertLongToDateString(systemTime: Long): String {
         return SimpleDateFormat("MMM-dd-yyyy HH:mm:ss")
             .format(systemTime).toString()
     }
