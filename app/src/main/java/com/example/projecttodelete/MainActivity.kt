@@ -151,7 +151,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "DocumentSnapshot added with content_POST:$title")
                 Toast.makeText(applicationContext, "sendSuccess", Toast.LENGTH_SHORT).show()
 
-
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document_POST", e)
